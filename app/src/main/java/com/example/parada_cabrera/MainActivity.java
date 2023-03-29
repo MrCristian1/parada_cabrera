@@ -59,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
         Producto producto3 = new Producto("Mouse",
                 5000.0,
                 "https://w7.pngwing.com/pngs/303/196/png-transparent-computer-mouse-logitech-g402-hyperion-fury-amazon-com-optical-mouse-computer-mouse-electronics-computer-video-game.png");
-
+        // inicialiozar el arraylist
         listaPrincipalProductos = new ArrayList<>();
-
+        //agregar productos
         listaPrincipalProductos.add(producto1);
         listaPrincipalProductos.add(producto2);
         listaPrincipalProductos.add(producto3);

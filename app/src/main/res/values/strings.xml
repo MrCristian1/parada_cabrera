@@ -2,4 +2,5 @@
     <string name="app_name">parada_cabrera</string>
     <string name="txt_listado">Listado de productos</string>
     <string name="txt_detalle">Detalle Producto</string>
+    <string name="txt_agregar_producto">AGREGAR PRODUCTO</string>
 </resources>

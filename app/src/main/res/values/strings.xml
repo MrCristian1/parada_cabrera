@@ -3,4 +3,7 @@
     <string name="txt_listado">Listado de productos</string>
     <string name="txt_detalle">Detalle Producto</string>
     <string name="txt_agregar_producto">AGREGAR PRODUCTO</string>
+    <string name="txt_btn_iniciar_sesion">INICIAR SESIÓN</string>
+    <string name="txt_btn_registrar">REGISTRAR</string>
+
 </resources>

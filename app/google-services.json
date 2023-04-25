@@ -1,0 +1,39 @@
+ {
+  "project_info": {
+    "project_number": "696479134857",
+    "project_id": "paradacabrera-e6831",
+    "storage_bucket": "paradacabrera-e6831.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696479134857:android:8c245988b007ae3bb64258",
+        "android_client_info": {
+          "package_name": "com.example.parada_cabrera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696479134857-6a9qe5ib0pueiu32jji7ikrc6qk2rg07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_Rx2ygOPj62MrH-eoSKj_BCyMKGW4H7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696479134857-6a9qe5ib0pueiu32jji7ikrc6qk2rg07.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

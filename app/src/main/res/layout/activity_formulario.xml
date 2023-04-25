@@ -23,7 +23,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextPRegistroName"
+            android:id="@+id/et_nombre_formulario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
@@ -38,7 +38,7 @@
             android:textSize="25dp" />
 
         <EditText
-            android:id="@+id/editTextTextPRegistroName2"
+            android:id="@+id/et_precio_formulario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
@@ -53,7 +53,7 @@
             android:textSize="25dp" />
 
         <EditText
-            android:id="@+id/editTextTextPRegistroName3"
+            android:id="@+id/et_imagen_formulario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"

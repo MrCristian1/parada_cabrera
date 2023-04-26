@@ -1,11 +1,28 @@
 package com.example.parada_cabrera;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.PropertyName;
+
+import org.checkerframework.checker.optional.qual.Present;
+
 import java.io.Serializable;
 
+
+
 public class Producto implements Serializable {
+    private String id;
     private String nombre;
     private Double precio;
     private String urlImagen;
+
+    @Exclude
+    public String getId() {
+        return id;
+    }
+    @Exclude
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Producto(){}
 
@@ -31,9 +48,14 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
+    @PropertyName("url_imagen")
+
     public String getUrlImagen() {
         return urlImagen;
     }
+
+    @PropertyName("url_imagen")
+
 
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;

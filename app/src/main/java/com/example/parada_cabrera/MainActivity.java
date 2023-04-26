@@ -1,5 +1,6 @@
 package com.example.parada_cabrera;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,12 +11,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Producto> listaPrincipalProductos;
+    private ArrayList<Producto> listaPrincipalProductos = new ArrayList<>();
     private RecyclerView rvListadoProductos;
+    private AdaptadorPersonalizado miAdaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         rvListadoProductos = findViewById(R.id.rv_listado_productos);
 
-        AdaptadorPersonalizado miAdaptador = new AdaptadorPersonalizado(listaPrincipalProductos);
+         miAdaptador = new AdaptadorPersonalizado(listaPrincipalProductos);
 
         miAdaptador.setOnItemClickListener(new AdaptadorPersonalizado.OnItemClickListener() {
             @Override
@@ -40,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemBtnEliminaClick(Producto miProducto, int posicion) {
+
+                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                firestore.collection("producto").document(miProducto.getId()).delete();
+
                 listaPrincipalProductos.remove(posicion);
                 miAdaptador.setListadoInformacion(listaPrincipalProductos);
             }
@@ -48,25 +60,38 @@ public class MainActivity extends AppCompatActivity {
         rvListadoProductos.setAdapter(miAdaptador);
         rvListadoProductos.setLayoutManager(new LinearLayoutManager(this));
     }
-
+    @Override
+    protected void onResume(){
+        super.onResume();
+        listaPrincipalProductos.clear();
+        cargarDatos();
+    }
     public void cargarDatos(){
-        Producto producto1 = new Producto();
-        producto1.setNombre("Computador HP");
-        producto1.setPrecio(8000.0);
-        producto1.setUrlImagen("https://e7.pngegg.com/pngimages/565/899/png-clipart-laptop-hewlett-packard-hp-pavilion-15-cd000-series-intel-core-i5-laptop-gadget-electronics.png");
 
-        Producto producto2 = new Producto("Teclado Dell",
-                800.00,
-                "https://e7.pngegg.com/pngimages/454/792/png-clipart-computer-keyboard-computer-mouse-keyboard-protectors-bluetooth-dell-computer-mouse-electronics-computer-keyboard.png");
-        Producto producto3 = new Producto("Mouse",
-                5000.0,
-                "https://w7.pngwing.com/pngs/303/196/png-transparent-computer-mouse-logitech-g402-hyperion-fury-amazon-com-optical-mouse-computer-mouse-electronics-computer-video-game.png");
-        // inicialiozar el arraylist
-        listaPrincipalProductos = new ArrayList<>();
-        //agregar productos
-        listaPrincipalProductos.add(producto1);
-        listaPrincipalProductos.add(producto2);
-        listaPrincipalProductos.add(producto3);
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection("productos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if(task.isSuccessful()){
+
+                    for (DocumentSnapshot document : task.getResult()){
+
+                        Producto productoAtrapado = document.toObject(Producto.class);
+                        productoAtrapado.setId(document.getId());
+
+                        listaPrincipalProductos.add(productoAtrapado);
+
+                    }
+
+                    miAdaptador.setListadoInformacion(listaPrincipalProductos);
+
+                }else{
+                    Toast.makeText(MainActivity.this, "No se pudo conectar al servidor", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     public void clickCerrarSesion(View view){

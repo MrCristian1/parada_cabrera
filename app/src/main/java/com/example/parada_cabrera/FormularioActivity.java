@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -34,6 +35,11 @@ public class FormularioActivity extends AppCompatActivity {
         nuevoProducto.setUrlImagen(url);
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+        firestore.collection("productos").add(nuevoProducto);
+
+        Toast.makeText(this, "Se creo el producto", Toast.LENGTH_SHORT).show();
+        finish();
 
 
 
